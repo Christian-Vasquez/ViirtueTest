@@ -13,3 +13,6 @@ the overall program ensures that if the user entered a already existing value th
 Language: Javascript & Jquery
 
 Keep entering emails to check whether the . or + will be removed and how is handled.
+
+Repo Link: https://github.com/Christian-Vasquez/ViirtueTest
+Deploy Link: https://christian-vasquez.github.io/ViirtueTest/
