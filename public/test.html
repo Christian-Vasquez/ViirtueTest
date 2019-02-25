@@ -6,11 +6,20 @@
 <html>
 <body>
 
+ <!-- question 1 -->
 <form action="/serialForm" method="post">
     Serial Number: <br> 
     <input type="text" id="snumb"><br>
   <input type="submit" value="Submit" id="submit">
 </form>
+
+<!-- question 2 -->
+<form action="/emaiForm" method="post">
+  email: <br> 
+  <input type="text" id="email"><br>
+<input type="submit" value="Submit 2" id="q2submit">
+</form>
+
 
 <div id="myModal" class="modal">
 
@@ -20,6 +29,7 @@
 
 </div>
 
+<!-- question 1 -->
 <script>
    $("#submit").on("click", function(event) {
       event.preventDefault();
@@ -44,6 +54,57 @@
           $(".modal-content").append(ptag);
         });
     });
+</script>
+
+<!-- question 2  -->
+<script>
+  var arrayEmail = [];
+  var counter = 0;
+
+  $("#q2submit").on("click", function(event){
+    event.preventDefault();
+    var input = $("#email").val().trim();
+    
+    var localName = input.split("@")[0];
+    var domainName = input.split("@")[1];
+    console.log("*************");
+    console.log("local Name: " + localName);
+    console.log("domain Name: " + domainName);
+    
+    //remove . and join string
+    console.log("Before localName (. eg): " + localName);
+    localName = localName.split(".").join("")
+    console.log("After localName: " + localName);
+
+    //remove + and keep everything before the + character
+    console.log("Before localName (+ eg): " + localName);
+    localName = localName.split("+")[0];
+    console.log("After localName: " + localName);
+    
+    input = localName + "@" + domainName;
+    console.log("FINAL EMAIL: " + input);
+  
+    console.log("Bool exp: " + arrayEmail.includes(input));
+    console.log("array email: " + arrayEmail);
+    if((arrayEmail.includes(input))){
+       alert("email repeated!");
+      }
+    else{
+        arrayEmail.push(input);
+        counter++;
+        console.log("array push email: " + arrayEmail);
+        alert("email send!");
+      }
+    
+    alert(input + " has been emailed!!");
+    console.log("output: " + counter);
+    alert("output: " + counter);
+    
+    //test.email+alex@viirtue.com  -- Output: testemail@viirtue.com
+    //test.e.mail+bob.cathy@viirtue.com -- Output: testemail@viirtue.com
+    //testemail+david@viir.tue.com -- Output:testemail@viir.tue.com
+    //Check web browser console for output or look at the alert
+  });
 </script>
 
 </body>
