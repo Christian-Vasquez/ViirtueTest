@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<head>
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <link rel="stylesheet" type="text/css" href="./css/style.css">
+</head>
+<html>
+<body>
+
+<form action="/serialForm" method="post">
+    Serial Number: <br> 
+    <input type="text" id="snumb"><br>
+  <input type="submit" value="Submit" id="submit">
+</form>
+
+<div id="myModal" class="modal">
+
+  <div class="modal-content">
+    <span class="close">&times;</span>
+  </div>
+
+</div>
+
+<script>
+   $("#submit").on("click", function(event) {
+      event.preventDefault();
+      console.log("Clicked");
+      var newSerNumb = {
+        snumb: $("#snumb").val().trim()
+      };
+
+      $(".close").on("click", function(event){
+        $("#myModal").css("display","none");
+      });
+
+      $.post("/serialForm", newSerNumb)
+        .then(function(data) {
+          console.log("data: ", data);
+          $("#myModal").css("display","block");
+          var ptag = $("<p>");
+          var nbreak = $("<br>");
+          ptag.append("Confirmation Number: " + data[0].confNumb )
+          ptag.append(nbreak);
+          ptag.append("Return Address: " + data[0].retAddress);
+          $(".modal-content").append(ptag);
+        });
+    });
+</script>
+
+</body>
+</html>
